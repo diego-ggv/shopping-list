@@ -1,13 +1,48 @@
 :root {
   --primary-color: rgba(248,34,34,0.73);
-  --secondary-color: #5035ff;
+  --secondary-color: rgba(80, 53, 255, 0.05);
   --text-color: rgba(36, 39, 47, 0.73);
 }
 
+* {
+  box-sizing: border-box;
+  font-family: "Avenir Next", serif;
+}
+
+body {
+  background: rgb(240, 236, 254);
+  height: 100%;
+  margin: 0;
+  padding-top: 40px;
+}
+
+
+ul {
+  min-height: 150px;
+  padding-left: 5px;
+  margin: 0 5px;
+  list-style: none;
+}
+
+li {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+
+button:active {
+  transform: scale(0.9);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.20);
+}
+
+/*
+  class selectors
+  ===============
+*/
 
 .App {
   display: grid;
-  max-width: 300px;
+  max-width: 320px;
   align-content: center;
   margin: 0 auto;
   justify-content: center;
@@ -20,9 +55,20 @@
   color: var(--primary-color);
 }
 
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  color: var(--text-color);
+  margin-left: 5px;
+}
+
 .input--field {
-  background: rgba(80, 53, 255, 0.05);
-  border: solid 2px var(--secondary-color);
+  background: var(--secondary-color);
+  border: none;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.20);
   border-radius: 5px;
   max-width: 100%;
   margin: 10px 5px;
