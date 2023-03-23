@@ -17,13 +17,7 @@ import './css/App.css'
    - ADD a check box to each li item and when checked cross the li items
      from the lis.
    - ADD a button that removes all items from the list.
-   - FIX state bug. something seems to rerender the state multiple times.
-     when console.log or deleting something from the DB seems to be multiple
-     instances of the same item.
-      
- DONE - Fix the id bug 
- DONE - create a function that adds the current input's value to the item list
- DONE - create a button that removes or crosses the items once purchased
+
  */
 
 
@@ -33,7 +27,7 @@ function App() {
   //=======
   const [itemList, setItemList] = useState([])  
   const [currentItem, setCurrentItem] = useState('')
-
+  
   //  Firebase 
   //==========
   const appSettings = {
@@ -42,14 +36,16 @@ function App() {
   const app = initializeApp(appSettings)
   const database = getDatabase(app)
   const shoppingCartDB = ref(database, 'shoppingList')
-  
+   
   useEffect(() => {
     onValue(shoppingCartDB, (snapshot) => {
-      const listArray = Object.entries(snapshot.val())
-      setItemList(listArray)
-      console.log(listArray)
+      if (snapshot.exists()){
+        const listArray = Object.entries(snapshot.val())
+        setItemList(listArray)
+      }
     })
   }, [])
+
 
   //  Functions
   //===========
@@ -93,7 +89,7 @@ function App() {
    through the itemList state. It uses the Item component to render 
    each item in the list, passing the key, id, name, and remove props.
    */
-  const allItems = itemList.map(item =>
+  let allItems = itemList.map(item =>
       <Item
           key={item[0]}
           id={item[0]}
@@ -101,6 +97,12 @@ function App() {
           remove={removeItem}
       />,
   )  
+  console.log(allItems)
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addItem()
+  }
   
   // HTML
   //=====
@@ -109,19 +111,27 @@ function App() {
         <h1 className="title">Shopping List</h1>
 
         <div className="container">
-          <input
-            className="input--field"
-            placeholder="add item to the list"
-            name="input"
-            value={currentItem}
-            onChange={(e) => newItem(e)}
-          />
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <input
+              className="input--field"
+              placeholder="add item to the list"
+              name="input"
+              value={currentItem}
+              onChange={(e) => newItem(e)}
+            />
+          </form>
           <i className="fa-solid fa-cart-shopping fa-lg icon"></i>
         </div>
 
-        <ul>
-          {allItems}
-        </ul>
+        {
+          allItems.length !== 0 ? 
+              <ul className="item--list">{allItems}</ul> 
+              : 
+              <p className="item--list-empty">
+                Not items yet... <br/>
+                add some stuff to the list!
+              </p>
+        }
 
         <button
             className="button--add"

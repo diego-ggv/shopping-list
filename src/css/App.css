@@ -17,18 +17,25 @@ body {
 }
 
 
-ul {
+.item--list {
   min-height: 150px;
   padding-left: 5px;
   margin: 0 5px;
   list-style: none;
 }
 
-li {
+.item--list li {
   font-size: 1.1rem;
   font-weight: 500;
+  color: var(--text-color);
 }
 
+.item--list-empty {
+  margin: 40px auto 110px;
+  text-align: center;
+  font-weight: 500;
+  color: var(--text-color);
+}
 
 button:active {
   transform: scale(0.9);
@@ -88,6 +95,7 @@ button:active {
   margin: 20px auto 40px;
   width: fit-content;
   padding: 5px 15px;
+  cursor: pointer;
 }
 
 .button--add:hover {
@@ -108,4 +116,5 @@ button:active {
   border: none;
   border-radius: 3px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.20);
+  cursor: pointer;
 }
