@@ -6,7 +6,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: "Avenir Next", serif;
+  font-family: 'avenir', 'Asap Condensed', sans-serif;
 }
 
 body {
@@ -60,6 +60,7 @@ button:active {
 
 .title {
   color: var(--primary-color);
+  text-align: center;
 }
 
 .container {

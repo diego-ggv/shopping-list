@@ -17,6 +17,7 @@ import './css/App.css'
    - ADD a check box to each li item and when checked cross the li items
      from the lis.
    - ADD a button that removes all items from the list.
+   - fix bug on mobile devices, styles don't seem to apply
 
  */
 
@@ -36,7 +37,7 @@ function App() {
   const app = initializeApp(appSettings)
   const database = getDatabase(app)
   const shoppingCartDB = ref(database, 'shoppingList')
-   
+
   useEffect(() => {
     onValue(shoppingCartDB, (snapshot) => {
       if (snapshot.exists()){
